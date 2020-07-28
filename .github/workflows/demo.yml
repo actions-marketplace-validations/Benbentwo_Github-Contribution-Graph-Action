@@ -1,0 +1,25 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '0 1 * * *' # every day 1 am
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+      - name: Get Current Contribution Chart
+        uses: Benbentwo/githubchart@0.1.0
+        with:
+          username: Benbentwo
+          file-output: contribution.svg
+      - name: Upload Image
+        uses: actions/upload-artifact@v2
+        with:
+          name: contribution-graph.svg
+          path: contribution.svg
