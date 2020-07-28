@@ -1,3 +1,29 @@
+Example:
+===
+```yaml
+      - name: Get Current Contribution Chart
+        uses: Benbentwo/githubchart@0.1.0
+        with:
+          username: Benbentwo
+          file-output: assets/images/contribution.svg
+```
+Inputs:
+===
+```yaml
+inputs:
+  username:
+    description: 'Github Username of graph to fetch'
+    required: true
+  file-output:
+    description: 'Where do you want the fetched image to be placed? (should have extension .svg)'
+    default: 'contribution.svg'
+    required: false
+  theme:
+    description: 'Theme from https://github.com/akerl/githubchart, currently [default, old, halloween]'
+    default: 'default'
+    required: false
+```
+
 GithubChart
 ============
 
