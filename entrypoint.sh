@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 
-cd ${GITHUB_WORKSPACE}
-
-PARAM_THEME=""
-if [[ ${THEME} ]]; then
-  PARAM_THEME="-c ${theme}"
+echo "Args: $@"
+USERNAME=$1
+OUTPUT_FILE=$2
+THEME=$3
+if [[ -z $3 ]]; then
+  THEME=default
 fi
+
+cd ${GITHUB_WORKSPACE} || echo "Couldn't cd to \${GITHUB_WORKSPACE}, did you checkout?" # used so that output_file's relative directory is inside the
+
+PARAM_THEME="-c ${THEME}"
 
 PARAM_USER=""
 if [[ ${USERNAME} ]]; then
-  PARAM_USER="-u ${username}"
+  PARAM_USER="-u ${USERNAME}"
 fi
 
-/githubchart ${PARAM_USER} ${PARAM_THEME} ${OUTPUT_FILE} || { echo "githubchart FAILED"; exit 1}
+echo "Running /githubchart ${PARAM_USER} ${PARAM_THEME} ${OUTPUT_FILE}"
+githubchart ${PARAM_USER} ${PARAM_THEME} ${OUTPUT_FILE}

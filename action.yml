@@ -1,0 +1,26 @@
+# action.yml
+name: 'Get Current Contribution Chart'
+description: 'Get the contribution graph of a user on github'
+branding:
+  icon: user
+  color: 'gray-dark'
+author: Benbentwo
+inputs:
+  username:
+    description: 'Github Username of graph to fetch'
+    required: true
+  file-output:
+    description: 'Where do you want the fetched image to be placed? (should have extension .svg)'
+    default: 'contribution.svg'
+    required: false
+  theme:
+    description: 'Theme from https://github.com/akerl/githubchart, currently [default, old, halloween]'
+    default: 'default'
+    required: false
+runs:
+  using: 'docker'
+  image: 'docker://bensmithdeveloper/githubchart:latest'
+  args:
+    - ${{ inputs.username }}
+    - ${{ inputs.file-output }}
+    - ${{ inputs.theme }}
