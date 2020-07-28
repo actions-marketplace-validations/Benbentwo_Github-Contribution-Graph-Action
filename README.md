@@ -1,3 +1,4 @@
+# Github Contribution Graph Action
 Example:
 ===
 ```yaml
